@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
 
 // Utils
 import styles from '../../utils/styles';
@@ -17,6 +19,7 @@ import logo from "../../utils/images/logo.svg";
 const Navbar = ({classes}) => {
  
   return (
+    <>
     <div className={classes.navigationWrapper}>
       <AppBar position="fixed">
         <Toolbar className={classes.navbarContainer}>
@@ -49,6 +52,10 @@ const Navbar = ({classes}) => {
         </Toolbar>
       </AppBar>
     </div>
+    <Grid item sm={12} xs={12}>
+        <Divider className={classes.divider} />
+    </Grid>
+    </>
   );
 };
 export default withStyles(styles)(Navbar);

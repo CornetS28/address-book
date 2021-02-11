@@ -76,6 +76,11 @@ const styles = (theme) => ({
     },
   },
 
+  //Homepage
+  divider: {
+    backgroundColor: theme.palette.secondary.main,
+  },
+
   // Footer
   footerWrapper: {
     marginToop: 20,
