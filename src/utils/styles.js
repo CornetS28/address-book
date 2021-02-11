@@ -75,6 +75,27 @@ const styles = (theme) => ({
       },
     },
   },
+
+  // Footer
+  footerWrapper: {
+    marginToop: 20,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
+    padding: "5px 0",
+    textAlign: "center",
+    boxShadow: "0 1px 10px rgba(164,164,164,.15)",
+    fontFamily: theme.palette.HelveticaNeue,
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 11,
+    },
+  },
+  copyWriteLink: {
+    color: theme.palette.color.red,
+    "&:hover": {
+      color: theme.palette.color.white,
+    },
+  },
 });
 
 export default styles;
