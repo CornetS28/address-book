@@ -12,7 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 
 // Components
-import SingleContact from '../components/SingleContact'
+import SingleContact from "../components/SingleContact";
 
 // Utils
 import styles from "../utils/styles";
@@ -54,7 +54,7 @@ const Home = ({ classes }) => {
       >
         <Grid item xs={12} sm={8}>
           <Typography variant="h6" className={classes.header}>
-            Your contacts
+            My contacts
           </Typography>
         </Grid>
 
@@ -157,11 +157,20 @@ const Home = ({ classes }) => {
             phone="+509 3233-3232"
             address="43, Petiov-Ville"
           />
-
-  
         </Grid>
-        <Grid item xs={12} sm={3} className={classes.gitHub}>
-          dsdsdd
+        <Grid container item xs={12} sm={3} className={classes.gitHub}>
+          <Grid item xs={11} sm={12} className={classes.gitHubRepo}>
+            <p className={classes.copyWriteText}>
+              Clone my repo via {" "}
+              <a
+                href="https://github.com/CornetS28"
+                target="_blank"
+                className={classes.copyWriteLink}
+              >
+                GitHub
+              </a>
+            </p>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
