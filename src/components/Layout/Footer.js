@@ -1,10 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
-
-// Images
-// import logo from "../../images/logo.png";
-// import footerLogo from "../../images/logo.png";
 
 // MUI stuff
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -15,11 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import styles from '../../utils/styles';
 
 const Footer = (props) => {
-  const history = useHistory();
 
-  const routeChange = (path) => {
-    history.push(path);
-  };
   const { classes } = props;
 
   return (
