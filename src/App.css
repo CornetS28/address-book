@@ -1,0 +1,9 @@
+html,
+body {
+  font-family: "helvetica neue", "BebasNeueBold", sans-serif;
+}
+.container {
+  margin: 56px -8px -8px -8px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
