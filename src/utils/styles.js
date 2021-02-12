@@ -77,8 +77,85 @@ const styles = (theme) => ({
   },
 
   //Homepage
+  homePageWrapper: {
+    backgroundColor: theme.palette.primary.main,
+    height: 900,
+    // min-height: 100vh;
+  },
+  headerAndFilterWrapper: {
+    margin: "80px auto auto auto",
+    [theme.breakpoints.down(600)]: {
+      margin: "40px auto auto auto",
+    },
+  },
+  header: {
+    textTransform: "uppercase",
+    fontWeight: 600,
+    fontFamily: theme.palette.font.HelveticaNeue,
+    fontStyle: "bold",
+    paddingLeft: 10,
+    paddingTop: 5,
+    color: theme.palette.color.white,
+    [theme.breakpoints.down(600)]: {
+      fontSize: 16,
+    },
+  },
+  filterContainer: {
+    width: 300,
+    float: "right",
+    [theme.breakpoints.down(896)]: {
+      width: "100%",
+    },
+    [theme.breakpoints.down(600)]: {
+      paddingLeft: 10,
+    },
+  },
+  sortBy: {
+    fontFamily: theme.palette.font.HelveticaNeue,
+    paddingLeft: 10,
+    backgroundColor: theme.palette.secondary.main,
+    borderBottomLeftRadius: 3,
+    borderTopLeftRadius: 3,
+    height: 40,
+    margin: "auto",
+    textAlign: "center",
+
+    [theme.breakpoints.down(600)]: {
+      paddingLeft: -20,
+    },
+  },
+  sortByText: {
+    marginTop: 12,
+    [theme.breakpoints.down(600)]: {
+      marginLeft: -15,
+    },
+  },
+
+  selecltFieldInput: {
+    width: "95%",
+    height: 25,
+    backgroundColor: "red",
+    paddingBottom: 20,
+    borderRadius: 0,
+  },
+  inputColor: {
+    color: theme.palette.color.yellow,
+  },
   divider: {
     backgroundColor: theme.palette.secondary.main,
+  },
+
+  select: {
+    backgroundColor: "#262626",
+    color: "white",
+    width: "95%",
+  },
+  smallEmpptySpace: {
+    height: 20,
+  },
+  contactsWrapper: {
+    margin: "-340px auto auto auto",
+    backgroundColor: "red",
   },
 
   // Footer
