@@ -157,11 +157,89 @@ const Home = ({ classes }) => {
             phone="+509 3233-3232"
             address="43, Petiov-Ville"
           />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <SingleContact
+            image={ProfileImage}
+            fullname="John Doe"
+            email="john@doe.com"
+            phone="+509 3233-3232"
+            address="43, Petiov-Ville"
+          />
+          <Grid container item xs={12} sm={12}>
+            <Grid item xs={12} sm={7} md={6} lg={5} className={classes.loadingMoreContact}>
+              <Typography variant="h6" className={classes.header}>
+                Loading More
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
+
         <Grid container item xs={12} sm={3} className={classes.gitHub}>
-          <Grid item xs={11} sm={12} className={classes.gitHubRepo}>
+          <Grid item xs={12} sm={12} className={classes.gitHubRepo}>
             <p className={classes.copyWriteText}>
-              Clone my repo via {" "}
+              Clone my repo via{" "}
               <a
                 href="https://github.com/CornetS28"
                 target="_blank"

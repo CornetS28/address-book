@@ -46,7 +46,7 @@ const Navbar = ({classes}) => {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ "Helvetica Neue": "search" }}
+                inputProps={{ "helvetica neue": "search" }}
               />
             </div>
           </Toolbar>

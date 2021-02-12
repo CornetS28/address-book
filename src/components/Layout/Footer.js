@@ -16,7 +16,7 @@ const Footer = (props) => {
   return (
     <>
       <Divider className={classes.divider} />
-      <Grid spacing={10} className={classes.footerWrapper}>
+      <Grid className={classes.footerWrapper}>
         <p className={classes.copyWriteText}>
           Designed and developed by{" "}
           <a

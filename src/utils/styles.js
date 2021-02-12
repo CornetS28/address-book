@@ -79,7 +79,7 @@ const styles = (theme) => ({
   //Homepage
   homePageWrapper: {
     backgroundColor: theme.palette.primary.main,
-    minHeight: "90vh",
+    // minHeight: "90vh",
   },
   headerAndFilterWrapper: {
     margin: "80px auto auto auto",
@@ -152,9 +152,9 @@ const styles = (theme) => ({
     height: 20,
   },
   contactsWrapper: {
-    margin: "-340px auto auto auto",
+    margin: "40px auto auto auto",
     [theme.breakpoints.down(960)]: {
-      margin: "-140px auto auto auto",
+      margin: "20px auto auto auto",
     },
     [theme.breakpoints.down(600)]: {
       margin: "40px auto auto auto",
@@ -162,7 +162,11 @@ const styles = (theme) => ({
   },
 
   gitHub: {
-    // backgroundColor: "green",
+    marginBottom: 30,
+    [theme.breakpoints.down(600)]: {
+      marginLeft: 10,
+      marginRight: 10,
+    },
   },
 
   contactContainer: {
@@ -211,6 +215,19 @@ const styles = (theme) => ({
     textAlign: "center",
     backgroundColor: theme.palette.color.gray,
     color: theme.palette.color.white,
+  },
+
+  // Loading more
+
+  loadingMoreContact: {
+    margin: "20px auto auto auto",
+    marginBottom: 40,
+    paddingBottom: 10,
+    textAlign: "center",
+    backgroundColor: theme.palette.color.red,
+    [theme.breakpoints.down(600)]: {
+      margin: "20px 10px 20px 10px",
+    },
   },
 
   // Footer
