@@ -12,6 +12,7 @@ export default {
       darcGray: "#1C1C1C",
       darkWhite: "#E4E5D1",
       red: "#C11F33",
+      gray: "#262626",
     },
 
     font: {
