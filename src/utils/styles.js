@@ -79,7 +79,7 @@ const styles = (theme) => ({
   //Homepage
   homePageWrapper: {
     backgroundColor: theme.palette.primary.main,
-    minHeight: "90vh"
+    minHeight: "90vh",
   },
   headerAndFilterWrapper: {
     margin: "80px auto auto auto",
@@ -162,7 +162,7 @@ const styles = (theme) => ({
   },
 
   gitHub: {
-    backgroundColor: "green",
+    // backgroundColor: "green",
   },
 
   contactContainer: {
@@ -204,6 +204,12 @@ const styles = (theme) => ({
     color: theme.palette.color.red,
   },
   rightUserData: {
+    color: theme.palette.color.white,
+  },
+  gitHubRepo: {
+    margin: "0px auto auto auto",
+    textAlign: "center",
+    backgroundColor: theme.palette.color.gray,
     color: theme.palette.color.white,
   },
 
