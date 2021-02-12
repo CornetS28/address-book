@@ -79,8 +79,7 @@ const styles = (theme) => ({
   //Homepage
   homePageWrapper: {
     backgroundColor: theme.palette.primary.main,
-    height: 900,
-    // min-height: 100vh;
+    minHeight: "90vh"
   },
   headerAndFilterWrapper: {
     margin: "80px auto auto auto",
@@ -134,7 +133,6 @@ const styles = (theme) => ({
   selecltFieldInput: {
     width: "95%",
     height: 25,
-    backgroundColor: "red",
     paddingBottom: 20,
     borderRadius: 0,
   },
@@ -155,12 +153,62 @@ const styles = (theme) => ({
   },
   contactsWrapper: {
     margin: "-340px auto auto auto",
-    backgroundColor: "red",
+    [theme.breakpoints.down(960)]: {
+      margin: "-140px auto auto auto",
+    },
+    [theme.breakpoints.down(600)]: {
+      margin: "40px auto auto auto",
+    },
+  },
+
+  gitHub: {
+    backgroundColor: "green",
+  },
+
+  contactContainer: {
+    marginBottom: 10,
+  },
+  singleContact: {
+    backgroundColor: theme.palette.color.gray,
+    width: "95%",
+    margin: "auto",
+  },
+  avatarContainer: {
+    display: "flex",
+  },
+  user: {
+    width: "50px",
+    height: "50px",
+    margin: "10px",
+  },
+  photo: {
+    width: "100%",
+    height: "50px",
+  },
+  fullname: {
+    fontFamily: theme.palette.HelveticaNeue,
+    color: theme.palette.secondary.main,
+    marginTop: 10,
+  },
+  moreInfo: {
+    margin: "auto",
+    paddingBottom: 20,
+  },
+  details: {
+    display: "flex",
+    width: "100%",
+    height: 20,
+  },
+  leftStaticText: {
+    width: "30%",
+    color: theme.palette.color.red,
+  },
+  rightUserData: {
+    color: theme.palette.color.white,
   },
 
   // Footer
   footerWrapper: {
-    marginToop: 20,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.secondary.main,
     padding: "5px 0",
