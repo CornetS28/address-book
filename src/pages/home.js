@@ -6,28 +6,31 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
+import Paper from "@material-ui/core/Paper";
+import Avatar from "@material-ui/core/Avatar";
 
 // Utils
 import styles from "../utils/styles";
+import ProfileImage from "../utils/images/profile.png";
 
 const signerOptions = [
   {
     value: "1",
-    label: "Broker/Manager",
+    label: "CH",
   },
   {
     value: "2",
-    label: "TBD 1",
+    label: "ES",
   },
   {
     value: "3",
-    label: "TBD 2",
+    label: "FR",
+  },
+  {
+    value: "3",
+    label: "GB",
   },
 ];
 
@@ -79,8 +82,9 @@ const Home = ({ classes }) => {
                         value={option.value}
                         style={{
                           backgroundColor: "#000000",
-                          color: "yellow",
+                          color: "#F79905",
                           padding: 5,
+                          textAlign: "center",
                         }}
                       >
                         {option.label}
@@ -98,13 +102,301 @@ const Home = ({ classes }) => {
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        item
-        xs={12}
-        sm={10}
-        className={classes.contactsWrapper}
-      >ZCsdcdc</Grid>
+      <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
+        <Grid
+          container
+          item
+          xs={12}
+          sm={9}
+          className={classes.contactsSubWrapper}
+        >
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid
+            container
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.contactContainer}
+          >
+            <Paper variant="outlined" className={classes.singleContact}>
+              <Grid className={classes.avatarContainer}>
+                <div edge="start">
+                  <Avatar className={classes.user}>
+                    <img
+                      src={ProfileImage}
+                      alt="logo"
+                      className={classes.photo}
+                    />
+                  </Avatar>
+                </div>
+                <div className={classes.fullname}>
+                  <p>Samuel Cornet</p>
+                </div>
+              </Grid>
+              <Grid
+                container
+                spacing={0}
+                item
+                xs={11}
+                sm={11}
+                className={classes.moreInfo}
+              >
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Phone:</div>
+                  <div className={classes.rightUserData}>+509 7373-7377</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Email:</div>
+                  <div className={classes.rightUserData}>samule@hall.me</div>
+                </div>
+                <div className={classes.details}>
+                  <div className={classes.leftStaticText}>Address:</div>
+                  <div className={classes.rightUserData}>23, Petion-Ville</div>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={3} className={classes.gitHub}>
+          dsdsdd
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
