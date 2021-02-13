@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 // MUI stuff
@@ -17,6 +17,10 @@ import SingleContact from "../components/SingleContact";
 // Utils
 import styles from "../utils/styles";
 import ProfileImage from "../utils/images/profile.png";
+
+// Redux Stuff
+import { connect, useSelector } from "react-redux";
+import { getUsersAction } from "../redux/actions/users";
 
 const signerOptions = [
   {
@@ -37,12 +41,28 @@ const signerOptions = [
   },
 ];
 
-const Home = ({ classes }) => {
+const Home = ({ classes, getUsers }) => {
   const [signers, setSigners] = React.useState(1);
 
   const onSignerChange = (event) => {
     setSigners(event.target.value);
   };
+
+  const handleUsers = async () => {
+    try {
+      await getUsers();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    handleUsers();
+  }, []);
+
+  const users = useSelector((state) => state.user.users);
+
+  console.log("uuuu@@:", users[0].name.first);
   return (
     <Grid container className={classes.homePageWrapper}>
       <Grid
@@ -115,120 +135,26 @@ const Home = ({ classes }) => {
           sm={9}
           className={classes.contactsSubWrapper}
         >
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
-          <SingleContact
-            image={ProfileImage}
-            fullname="John Doe"
-            email="john@doe.com"
-            phone="+509 3233-3232"
-            address="43, Petiov-Ville"
-          />
+          {users.map((user, idx) => (
+            <SingleContact
+              image={ProfileImage}
+              fullname={user.name.first + " " + user.name.last}
+              country={user.location.country}
+              phone={user.phone}
+              age={user.dob.age}
+              key={idx}
+            />
+          ))}
+
           <Grid container item xs={12} sm={12}>
-            <Grid item xs={12} sm={7} md={6} lg={5} className={classes.loadingMoreContact}>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              md={6}
+              lg={5}
+              className={classes.loadingMoreContact}
+            >
               <Typography variant="h6" className={classes.header}>
                 Loading More
               </Typography>
@@ -257,6 +183,12 @@ const Home = ({ classes }) => {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
+  getUsers: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Home);
+const mapDispatchToProps = {
+  getUsers: getUsersAction,
+};
+
+// export default withStyles(styles)(connect(null, mapDispatchToProps)(Home));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Home));
