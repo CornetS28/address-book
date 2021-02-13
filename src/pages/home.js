@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // MUI stuff
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -8,8 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
+
 
 // Components
 import SingleContact from "../components/SingleContact";
@@ -17,7 +17,6 @@ import LoadingMore from "../components/LoadingMore";
 
 // Utils
 import styles from "../utils/styles";
-import ProfileImage from "../utils/images/profile.png";
 
 // Redux Stuff
 import { connect, useSelector } from "react-redux";
@@ -43,50 +42,32 @@ const signerOptions = [
 ];
 
 const Home = ({ classes, getUsers, allUsers }) => {
-  const [signers, setSigners] = React.useState(1);
+  const [userCategory, setUserCategory] = React.useState(1);
 
-  const [loading, setLoading] = useState(false);
-  const [noData, setNoData] = useState(false);
   const users = useSelector((state) => state.user.users);
 
   const [count, setCount] = useState({
     prev: 0,
-    next: 5,
+    next: 20,
   });
-  const [current, setCurrent] = useState(users?.slice(count.prev, count.next));
+  const [hasMore, setHasMore] = useState(true);
+  const [current, setCurrent] = useState(users.slice(count.prev, count.next));
   const getMoreData = () => {
-    if (current?.length === users?.length) {
-      setLoading(false);
-      setNoData(true);
+    if (current.length === users.length) {
+      setHasMore(false);
+      return;
     }
-
     setTimeout(() => {
-      setLoading(true);
-      setCurrent(current?.concat(users?.slice(count.prev + 5, count.next + 5)));
+      setCurrent(current.concat(users.slice(count.prev + 5, count.next + 5)));
     }, 2000);
     setCount((prevState) => ({
-      prev: prevState.prev + 5,
-      next: prevState.next + 5,
+      prev: prevState.prev + 20,
+      next: prevState.next + 20,
     }));
   };
 
-  useEffect(() => {
-    getMoreData();
-  }, []);
-
-  window.onscroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
-      if (!noData) {
-        getMoreData();
-      }
-    }
-  };
-  console.log("check loading:", loading);
   const onSignerChange = (event) => {
-    setSigners(event.target.value);
+    setUserCategory(event.target.value);
   };
 
   const handleUsers = async () => {
@@ -101,7 +82,6 @@ const Home = ({ classes, getUsers, allUsers }) => {
     handleUsers();
   }, []);
 
-  console.log("uuuu@@:", users[0]);
   return (
     <Grid container className={classes.homePageWrapper}>
       <Grid
@@ -135,7 +115,7 @@ const Home = ({ classes, getUsers, allUsers }) => {
                     className={classes.select}
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={signers}
+                    value={userCategory}
                     onChange={onSignerChange}
                   >
                     {signerOptions.map((option) => (
@@ -173,23 +153,36 @@ const Home = ({ classes, getUsers, allUsers }) => {
           sm={9}
           className={classes.contactsSubWrapper}
         >
-          {/* {allUsers} */}
-          {users.map((user, idx) => (
-            <SingleContact
-              image={user.picture.medium}
-              fullname={user.name.first + " " + user.name.last}
-              country={user.location.country}
-              phone={user.phone}
-              age={user.dob.age}
-              key={idx}
-            />
-          ))}
-
-          {/* LOADING MORE */}
-
-          {!loading ? <LoadingMore /> : ""}
-
-          {/* {noData ? <div className="text-center">no more data anymore!</div> : ''} */}
+          <InfiniteScroll
+            dataLength={current.length}
+            next={getMoreData}
+            hasMore={hasMore}
+            loader={<LoadingMore />}
+          >
+            <Grid container justify="space-evenly">
+              {current &&
+                current.map((user, idx) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                    key={idx}
+                    className={classes.contactContainer}
+                  >
+                    <SingleContact
+                      image={user.picture.medium}
+                      fullname={user.name.first + " " + user.name.last}
+                      country={user.location.country}
+                      phone={user.phone}
+                      age={user.dob.age}
+                      key={idx}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+          </InfiniteScroll>
         </Grid>
 
         <Grid container item xs={12} sm={3} className={classes.gitHub}>
