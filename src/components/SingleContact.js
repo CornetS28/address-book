@@ -12,7 +12,7 @@ import styles from "../utils/styles";
 
 const SingleContact = (props) => {
 
-  const { classes, image, fullname, email, phone, address } = props;
+  const { classes, image, fullname, country, phone, age, key } = props;
   return (
     <Grid
       item
@@ -20,6 +20,7 @@ const SingleContact = (props) => {
       sm={6}
       md={4}
       lg={3}
+      key={key}
       className={classes.contactContainer}
     >
       <Paper variant="outlined" className={classes.singleContact}>
@@ -47,11 +48,11 @@ const SingleContact = (props) => {
           </div>
           <div className={classes.details}>
             <div className={classes.leftStaticText}>Email:</div>
-            <div className={classes.rightUserData}>{email}</div>
+            <div className={classes.rightUserData}>{country}</div>
           </div>
           <div className={classes.details}>
-            <div className={classes.leftStaticText}>Address:</div>
-            <div className={classes.rightUserData}>{address}</div>
+            <div className={classes.leftStaticText}>Age:</div>
+            <div className={classes.rightUserData}>{age}</div>
           </div>
         </Grid>
       </Paper>
