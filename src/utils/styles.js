@@ -77,6 +77,7 @@ const styles = (theme) => ({
   },
 
   //Homepage
+
   homePageWrapper: {
     backgroundColor: theme.palette.primary.main,
     // minHeight: "90vh",
@@ -171,6 +172,10 @@ const styles = (theme) => ({
 
   contactContainer: {
     marginBottom: 10,
+    cursor: "pointer",
+    // "&:hover": {
+    //   backgroundColor: "rgba(0, 0, 0, 0.07)",
+    // },
   },
   singleContact: {
     backgroundColor: theme.palette.color.gray,
