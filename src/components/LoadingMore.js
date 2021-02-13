@@ -31,25 +31,6 @@ export const LoadingIndicator = ({classes}) => {
         </Typography>
       </Grid>
     </Grid>
-    // <Grid sm={10} xs={12} style={{ margin: "auto" }}>
-    //   <div
-    //     style={{
-    //       display: "flex",
-    //       width: 140,
-    //       margin: "auto",
-    //       alignSelf: "center",
-    //     }}
-    //   >
-    //     <Spinner
-    //       animation="border"
-    //       style={{ color: "#2196F3", borderWidth: 3, marginRight: 15 }}
-    //     />
-    //     <p style={{ marginTop: 7, color: "#2196F3", fontSize: 12 }}>
-    //       {" "}
-    //       Loading More...{" "}
-    //     </p>
-    //   </div>
-    // </Grid>
   );
 };
 

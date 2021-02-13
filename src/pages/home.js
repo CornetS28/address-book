@@ -47,48 +47,44 @@ const Home = ({ classes, getUsers, allUsers }) => {
 
   const [loading, setLoading] = useState(false);
   const [noData, setNoData] = useState(false);
-    const users = useSelector((state) => state.user.users);
+  const users = useSelector((state) => state.user.users);
 
-     const [count, setCount] = useState({
-       prev: 0,
-       next: 5,
-     });
-     const [current, setCurrent] = useState(
-       users?.slice(count.prev, count.next)
-     );
-     const getMoreData = () => {
-       if (current?.length === users?.length) {
-         setLoading(false);
-         setNoData(true);
-       }
+  const [count, setCount] = useState({
+    prev: 0,
+    next: 5,
+  });
+  const [current, setCurrent] = useState(users?.slice(count.prev, count.next));
+  const getMoreData = () => {
+    if (current?.length === users?.length) {
+      setLoading(false);
+      setNoData(true);
+    }
 
-       setTimeout(() => {
-         setLoading(true);
-         setCurrent(
-           current?.concat(users?.slice(count.prev + 5, count.next + 5))
-         );
-       }, 2000);
-       setCount((prevState) => ({
-         prev: prevState.prev + 5,
-         next: prevState.next + 5,
-       }));
-     };
+    setTimeout(() => {
+      setLoading(true);
+      setCurrent(current?.concat(users?.slice(count.prev + 5, count.next + 5)));
+    }, 2000);
+    setCount((prevState) => ({
+      prev: prevState.prev + 5,
+      next: prevState.next + 5,
+    }));
+  };
 
-    useEffect(() => {
-      getMoreData();
-    }, []);
+  useEffect(() => {
+    getMoreData();
+  }, []);
 
-    window.onscroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        if (!noData) {
-          getMoreData();
-        }
+  window.onscroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      if (!noData) {
+        getMoreData();
       }
-    };
-
+    }
+  };
+  console.log("check loading:", loading);
   const onSignerChange = (event) => {
     setSigners(event.target.value);
   };
@@ -104,8 +100,6 @@ const Home = ({ classes, getUsers, allUsers }) => {
   useEffect(() => {
     handleUsers();
   }, []);
-
-
 
   console.log("uuuu@@:", users[0]);
   return (
@@ -192,9 +186,9 @@ const Home = ({ classes, getUsers, allUsers }) => {
           ))}
 
           {/* LOADING MORE */}
-        
-          {loading ? (<LoadingMore />) : ("")}
-          
+
+          {!loading ? <LoadingMore /> : ""}
+
           {/* {noData ? <div className="text-center">no more data anymore!</div> : ''} */}
         </Grid>
 
