@@ -15,8 +15,13 @@ import Divider from "@material-ui/core/Divider";
 import styles from '../../utils/styles';
 import logo from "../../utils/images/logo.svg";
 
+// Components
+
+import Search from "../Search"
+
 
 const Navbar = ({classes}) => {
+
  
   return (
     <>
@@ -36,7 +41,7 @@ const Navbar = ({classes}) => {
             <Typography className={classes.navHeader} variant="h6" noWrap>
               Address Book
             </Typography>
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -48,7 +53,8 @@ const Navbar = ({classes}) => {
                 }}
                 inputProps={{ "helvetica neue": "search" }}
               />
-            </div>
+            </div> */}
+            <Search/>
           </Toolbar>
             <Divider className={classes.divider} />
         </AppBar>

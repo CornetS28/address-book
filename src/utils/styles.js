@@ -222,12 +222,18 @@ const styles = (theme) => ({
   loadingMoreContact: {
     margin: "20px auto auto auto",
     marginBottom: 40,
-    paddingBottom: 10,
+    paddingBottom: 20,
     textAlign: "center",
     backgroundColor: theme.palette.color.red,
     [theme.breakpoints.down(600)]: {
       margin: "20px 10px 20px 10px",
     },
+  },
+
+  circularProgress: {
+    top: 15,
+    marginLeft: 30,
+    position: "relative",
   },
 
   // Footer

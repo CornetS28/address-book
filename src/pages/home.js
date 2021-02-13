@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // MUI stuff
@@ -13,6 +13,7 @@ import Avatar from "@material-ui/core/Avatar";
 
 // Components
 import SingleContact from "../components/SingleContact";
+import LoadingMore from "../components/LoadingMore";
 
 // Utils
 import styles from "../utils/styles";
@@ -41,8 +42,52 @@ const signerOptions = [
   },
 ];
 
-const Home = ({ classes, getUsers }) => {
+const Home = ({ classes, getUsers, allUsers }) => {
   const [signers, setSigners] = React.useState(1);
+
+  const [loading, setLoading] = useState(false);
+  const [noData, setNoData] = useState(false);
+    const users = useSelector((state) => state.user.users);
+
+     const [count, setCount] = useState({
+       prev: 0,
+       next: 5,
+     });
+     const [current, setCurrent] = useState(
+       users?.slice(count.prev, count.next)
+     );
+     const getMoreData = () => {
+       if (current?.length === users?.length) {
+         setLoading(false);
+         setNoData(true);
+       }
+
+       setTimeout(() => {
+         setLoading(true);
+         setCurrent(
+           current?.concat(users?.slice(count.prev + 5, count.next + 5))
+         );
+       }, 2000);
+       setCount((prevState) => ({
+         prev: prevState.prev + 5,
+         next: prevState.next + 5,
+       }));
+     };
+
+    useEffect(() => {
+      getMoreData();
+    }, []);
+
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        if (!noData) {
+          getMoreData();
+        }
+      }
+    };
 
   const onSignerChange = (event) => {
     setSigners(event.target.value);
@@ -60,9 +105,9 @@ const Home = ({ classes, getUsers }) => {
     handleUsers();
   }, []);
 
-  const users = useSelector((state) => state.user.users);
 
-  console.log("uuuu@@:", users[0].name.first);
+
+  console.log("uuuu@@:", users[0]);
   return (
     <Grid container className={classes.homePageWrapper}>
       <Grid
@@ -126,7 +171,6 @@ const Home = ({ classes, getUsers }) => {
       </Grid>
 
       {/* ALL CONTACTS */}
-
       <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
         <Grid
           container
@@ -135,9 +179,10 @@ const Home = ({ classes, getUsers }) => {
           sm={9}
           className={classes.contactsSubWrapper}
         >
+          {/* {allUsers} */}
           {users.map((user, idx) => (
             <SingleContact
-              image={ProfileImage}
+              image={user.picture.medium}
               fullname={user.name.first + " " + user.name.last}
               country={user.location.country}
               phone={user.phone}
@@ -146,20 +191,11 @@ const Home = ({ classes, getUsers }) => {
             />
           ))}
 
-          <Grid container item xs={12} sm={12}>
-            <Grid
-              item
-              xs={12}
-              sm={7}
-              md={6}
-              lg={5}
-              className={classes.loadingMoreContact}
-            >
-              <Typography variant="h6" className={classes.header}>
-                Loading More
-              </Typography>
-            </Grid>
-          </Grid>
+          {/* LOADING MORE */}
+        
+          {loading ? (<LoadingMore />) : ("")}
+          
+          {/* {noData ? <div className="text-center">no more data anymore!</div> : ''} */}
         </Grid>
 
         <Grid container item xs={12} sm={3} className={classes.gitHub}>
@@ -190,5 +226,4 @@ const mapDispatchToProps = {
   getUsers: getUsersAction,
 };
 
-// export default withStyles(styles)(connect(null, mapDispatchToProps)(Home));
 export default connect(null, mapDispatchToProps)(withStyles(styles)(Home));
