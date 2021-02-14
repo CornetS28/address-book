@@ -143,6 +143,9 @@ const styles = (theme) => ({
   divider: {
     backgroundColor: theme.palette.secondary.main,
   },
+  // multilineColor: {
+  //    backgroundColor: "#262626",
+  // },
 
   select: {
     backgroundColor: "#262626",
@@ -173,14 +176,17 @@ const styles = (theme) => ({
   contactContainer: {
     marginBottom: 10,
     cursor: "pointer",
-    // "&:hover": {
-    //   backgroundColor: "rgba(0, 0, 0, 0.07)",
-    // },
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   singleContact: {
     backgroundColor: theme.palette.color.gray,
     width: "95%",
     margin: "auto",
+    "&:hover": {
+      backgroundColor: "#2B2B2C",
+    },
   },
   avatarContainer: {
     display: "flex",

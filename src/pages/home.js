@@ -9,7 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import TextField from "@material-ui/core/TextField";
 
 // Components
 import SingleContact from "../components/SingleContact";
@@ -22,43 +22,55 @@ import styles from "../utils/styles";
 import { connect, useSelector } from "react-redux";
 import { getUsersAction } from "../redux/actions/users";
 
-const signerOptions = [
-  {
-    value: "1",
-    label: "CH",
-  },
-  {
-    value: "2",
-    label: "ES",
-  },
-  {
-    value: "3",
-    label: "FR",
-  },
-  {
-    value: "3",
-    label: "GB",
-  },
-];
-
 const Home = ({ classes, getUsers, allUsers }) => {
-  const [userCategory, setUserCategory] = React.useState(1);
+  const [defaultNatCategory, setNatCategory] = useState("ALL");
 
   const users = useSelector((state) => state.user.users);
+
+  const choosesNat = (val) => {
+    if (val === "ALL") return users;
+    return users.filter((user) => user.nat === val);
+  };
+
+  const [selectedNat, setSelectedNat] = useState(users);
+  const nationalityOptions = [
+    {
+      value: "ALL",
+      label: "ALL",
+    },
+    {
+      value: "ES",
+      label: "ES",
+    },
+    {
+      value: "FR",
+      label: "FR",
+    },
+    {
+      value: "GB",
+      label: "GB",
+    },
+    {
+      value: "CH",
+      label: "CH",
+    },
+  ];
 
   const [count, setCount] = useState({
     prev: 0,
     next: 20,
   });
   const [hasMore, setHasMore] = useState(true);
-  const [current, setCurrent] = useState(users.slice(count.prev, count.next));
+  const [current, setCurrent] = useState(users?.slice(count.prev, count.next));
   const getMoreData = () => {
-    if (current.length === users.length) {
+    if (current.length === selectedNat?.length || current.length === 0) {
       setHasMore(false);
       return;
     }
     setTimeout(() => {
-      setCurrent(current.concat(users.slice(count.prev + 5, count.next + 5)));
+      setCurrent(
+        current.concat(selectedNat?.slice(count.prev + 20, count.next + 20))
+      );
     }, 2000);
     setCount((prevState) => ({
       prev: prevState.prev + 20,
@@ -66,8 +78,12 @@ const Home = ({ classes, getUsers, allUsers }) => {
     }));
   };
 
-  const onSignerChange = (event) => {
-    setUserCategory(event.target.value);
+  const onChange = (event) => {
+    const newUser = choosesNat(event.target.value);
+    setSelectedNat(newUser);
+    setNatCategory(event.target.value);
+    setHasMore(true);
+    setCurrent(newUser.slice(count.prev, count.next));
   };
 
   const handleUsers = async () => {
@@ -82,6 +98,7 @@ const Home = ({ classes, getUsers, allUsers }) => {
     handleUsers();
   }, []);
 
+  console.log("Nat Usr:", selectedNat?.slice(0, 20));
   return (
     <Grid container className={classes.homePageWrapper}>
       <Grid
@@ -115,10 +132,10 @@ const Home = ({ classes, getUsers, allUsers }) => {
                     className={classes.select}
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={userCategory}
-                    onChange={onSignerChange}
+                    value={defaultNatCategory}
+                    onChange={onChange}
                   >
-                    {signerOptions.map((option) => (
+                    {nationalityOptions.map((option) => (
                       <option
                         key={option.label}
                         value={option.value}
@@ -154,13 +171,14 @@ const Home = ({ classes, getUsers, allUsers }) => {
           className={classes.contactsSubWrapper}
         >
           <InfiniteScroll
-            dataLength={current.length}
+            dataLength={current?.length}
             next={getMoreData}
             hasMore={hasMore}
             loader={<LoadingMore />}
           >
             <Grid container justify="space-evenly">
               {current &&
+                selectedNat &&
                 current.map((user, idx) => (
                   <Grid
                     item
