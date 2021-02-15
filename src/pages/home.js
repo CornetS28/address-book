@@ -38,8 +38,6 @@ const Home = ({ classes, getUsers }) => {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState("");
 
-  console.log("old Users:", users);
-
   const choosesNat = (val) => {
     if (val === "ALL") return users;
     return users.filter((user) => user.nat === val);
@@ -126,14 +124,11 @@ const Home = ({ classes, getUsers }) => {
     const testUser = current.find((user) => user.login.uuid === uuid);
     setOpen(true);
     setUser(testUser);
-    console.log("test id:", current[0].login.uuid, uuid);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log("Nat Usr:", selectedNat?.slice(0, 20));
   return (
     <Grid container className={classes.homePageWrapper}>
       <Grid
@@ -183,7 +178,6 @@ const Home = ({ classes, getUsers }) => {
           lg={4}
           className={classes.filterWrapper}
         >
-          
           <Grid container item sm={12} className={classes.filterContainer}>
             <Grid item xs={4} sm={4} className={classes.sortBy}>
               <p className={classes.sortByText}>Sort by</p>
@@ -311,14 +305,12 @@ const Home = ({ classes, getUsers }) => {
             timeout: 500,
           }}
         >
-          <Fade in={open}>
+          <Fade in={open} className={classes.modalWrapper}>
             <Grid item xs={10} sm={8}>
-              <div className={classes.paper}>
-                <h4 id="transition-modal-title">User Full Details</h4>
-                <Grid item sx={12} sm={12}>
-                  <FullUserDetails user={user} />
-                </Grid>
-              </div>
+              <h4 className={classes.modalHeader}>User Full Details</h4>
+              <Grid item sx={12} sm={12}>
+                <FullUserDetails user={user} />
+              </Grid>
             </Grid>
           </Fade>
         </Modal>

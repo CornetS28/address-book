@@ -82,7 +82,7 @@ const styles = (theme) => ({
   //Homepage
   homePageWrapper: {
     backgroundColor: theme.palette.primary.main,
-   height: "90vh",
+    height: "90vh",
     overflowY: "scroll",
   },
   headerAndFilterWrapper: {
@@ -250,12 +250,37 @@ const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "rgba(255, 157, 0, 0.253)",
   },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+  modalWrapper: {
+    backgroundColor: theme.palette.color.gray,
+  },
+  userFullDetailsWrapper: {
+    backgroundColor: theme.palette.color.gray,
+    width: "95%",
+    overflowY: "scroll",
+    margin: "auto auto 35px auto",
+    "&:hover": {
+      backgroundColor: "#2B2B2C",
+    },
+  },
+  modalHeader: {
+    textTransform: "uppercase",
+    fontWeight: 600,
+    fontFamily: theme.palette.font.HelveticaNeue,
+    fontStyle: "bold",
+    paddingLeft: 10,
+    paddingTop: 5,
+    textAlign: "center",
+    color: theme.palette.color.white,
+    [theme.breakpoints.down(600)]: {
+      fontSize: 16,
+    },
+  },
+  moreDetails: {
+    display: "flex",
+    width: "100%",
+    height: 20,
   },
 
   // Loading more
@@ -274,16 +299,6 @@ const styles = (theme) => ({
     top: 15,
     marginLeft: 30,
     position: "relative",
-  },
-
-  // Full details of user
-  userFullDetailsWrapper: {
-    backgroundColor: theme.palette.color.gray,
-    width: "95%",
-    margin: "auto",
-    "&:hover": {
-      backgroundColor: "#2B2B2C",
-    },
   },
 
   // Footer
