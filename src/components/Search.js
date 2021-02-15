@@ -17,11 +17,21 @@ import Home from '../pages/home';
 import { connect, useSelector } from "react-redux";
 import { getUsersAction } from "../redux/actions/users";
 
-const Search = ({ classes, getUsers, }) => {
+const Search = ({ classes, getUsers, test }) => {
   const [input, setInput] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
 
   const users = useSelector((state) => state.user.users);
+
+  useEffect(() => {
+
+    const filterResults = users?.filter((user) =>
+    // console.log("welll",user.name.first)
+      user.name.first.toLowerCase().includes(input.toLowerCase()
+      )
+    );
+    setSearchResults(filterResults);
+  }, [input]);
 
   useEffect(() => {
     setSearchResults(
@@ -54,17 +64,18 @@ const Search = ({ classes, getUsers, }) => {
         />
       </div>
 
-      {/* <Home allUsers={searchResults.map((user, idx)=> {
-        <SingleContact
-          // image={ProfileImage}
-          fullname={user.name.first + " " + user.name.last}
-          country={user.location.country}
-          phone={user.phone}
-          age={user.dob.age}
-          key={idx}
-        />;
-      })}
-      /> */}
+      {/* {searchResults} */}
+      {/* {searchResults.map((user, idx) => (
+            <SingleContact 
+              // image={ProfileImage}
+              fullname={user.name.first + " " + user.name.last}
+              country={user.location.country}
+              phone={user.phone}
+              age={user.dob.age}
+              key={idx}
+              
+            />
+         ))} */}
     </>
   );
 };

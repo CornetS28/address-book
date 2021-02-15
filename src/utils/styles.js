@@ -143,9 +143,6 @@ const styles = (theme) => ({
   divider: {
     backgroundColor: theme.palette.secondary.main,
   },
-  // multilineColor: {
-  //    backgroundColor: "#262626",
-  // },
 
   select: {
     backgroundColor: "#262626",
@@ -162,6 +159,13 @@ const styles = (theme) => ({
     },
     [theme.breakpoints.down(600)]: {
       margin: "40px auto auto auto",
+    },
+  },
+  contactsSubWrapper: {
+    height: "667px",
+    overflowY: "scroll",
+    [theme.breakpoints.down(412)]: {
+      height: "440px",
     },
   },
 
@@ -227,6 +231,18 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.color.gray,
     color: theme.palette.color.white,
   },
+  // Modal
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 
   // Loading more
 
@@ -245,6 +261,16 @@ const styles = (theme) => ({
     top: 15,
     marginLeft: 30,
     position: "relative",
+  },
+
+  // Full details of user
+  userFullDetailsWrapper: {
+    backgroundColor: theme.palette.color.gray,
+    width: "95%",
+    margin: "auto",
+    "&:hover": {
+      backgroundColor: "#2B2B2C",
+    },
   },
 
   // Footer

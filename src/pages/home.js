@@ -9,11 +9,17 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
 
 // Components
 import SingleContact from "../components/SingleContact";
 import LoadingMore from "../components/LoadingMore";
+import FullUserDetails from "../components/FullUserDetails";
 
 // Utils
 import styles from "../utils/styles";
@@ -22,10 +28,13 @@ import styles from "../utils/styles";
 import { connect, useSelector } from "react-redux";
 import { getUsersAction } from "../redux/actions/users";
 
-const Home = ({ classes, getUsers, allUsers }) => {
+import Search from "../components/Search";
+
+const Home = ({ classes, getUsers }) => {
   const [defaultNatCategory, setNatCategory] = useState("ALL");
 
   const users = useSelector((state) => state.user.users);
+  console.log("old Users:", users);
 
   const choosesNat = (val) => {
     if (val === "ALL") return users;
@@ -33,6 +42,7 @@ const Home = ({ classes, getUsers, allUsers }) => {
   };
 
   const [selectedNat, setSelectedNat] = useState(users);
+
   const nationalityOptions = [
     {
       value: "ALL",
@@ -77,6 +87,8 @@ const Home = ({ classes, getUsers, allUsers }) => {
       next: prevState.next + 20,
     }));
   };
+  const [input, setInput] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
 
   const onChange = (event) => {
     const newUser = choosesNat(event.target.value);
@@ -84,7 +96,20 @@ const Home = ({ classes, getUsers, allUsers }) => {
     setNatCategory(event.target.value);
     setHasMore(true);
     setCurrent(newUser.slice(count.prev, count.next));
+    
   };
+  const handleSearch = (e) => {
+    setInput(e.target.value);
+    if (e.target.value==="") {
+      setCurrent(users?.slice(count.prev, count.next));
+    } else {
+       setCurrent(
+         users?.filter((user) =>
+           user.name.first.toLowerCase().startsWith(input.toLowerCase())
+         )
+       );
+    }
+  }
 
   const handleUsers = async () => {
     try {
@@ -97,6 +122,20 @@ const Home = ({ classes, getUsers, allUsers }) => {
   useEffect(() => {
     handleUsers();
   }, []);
+
+  const [open, setOpen] = React.useState(false);
+  const [user, setUser] = React.useState("");
+
+  const handleOpen = (uuid) => {
+    const testUser = current.find((user) => user.login.uuid === uuid);
+    setOpen(true);
+    setUser(testUser);
+    console.log("test id:", current[0].login.uuid, uuid);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   console.log("Nat Usr:", selectedNat?.slice(0, 20));
   return (
@@ -112,6 +151,25 @@ const Home = ({ classes, getUsers, allUsers }) => {
           <Typography variant="h6" className={classes.header}>
             My contacts
           </Typography>
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search a name"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "helvetica neue": "search" }}
+              value={input}
+              placeholder={"Search a Session"}
+              onChange={handleSearch}
+            />
+          </div>
         </Grid>
 
         <Grid item xs={12} sm={4}>
@@ -170,11 +228,33 @@ const Home = ({ classes, getUsers, allUsers }) => {
           sm={9}
           className={classes.contactsSubWrapper}
         >
+          {searchResults &&
+            searchResults.map((user, idx) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                key={idx}
+                className={classes.contactContainer}
+              >
+                <SingleContact
+                  image={user.picture.medium}
+                  fullname={user.name.first + " " + user.name.last}
+                  country={user.location.country}
+                  phone={user.phone}
+                  age={user.dob.age}
+                  key={idx}
+                />
+              </Grid>
+            ))}
+
           <InfiniteScroll
             dataLength={current?.length}
             next={getMoreData}
             hasMore={hasMore}
-            loader={<LoadingMore />}
+            loader={current.length !==0 && <LoadingMore />}
           >
             <Grid container justify="space-evenly">
               {current &&
@@ -188,6 +268,7 @@ const Home = ({ classes, getUsers, allUsers }) => {
                     lg={3}
                     key={idx}
                     className={classes.contactContainer}
+                    onClick={() => handleOpen(user.login.uuid)}
                   >
                     <SingleContact
                       image={user.picture.medium}
@@ -199,9 +280,36 @@ const Home = ({ classes, getUsers, allUsers }) => {
                     />
                   </Grid>
                 ))}
+
+                {current.length===0 && <h2 style={{ color: "yellow"}}> No Data</h2>}
+              
             </Grid>
           </InfiniteScroll>
         </Grid>
+
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Grid item xs={10} sm={8}>
+              <div className={classes.paper}>
+                <h4 id="transition-modal-title">User Full Details</h4>
+                <Grid item sx={12} sm={12}>
+                  <FullUserDetails user={user} />
+                </Grid>
+              </div>
+            </Grid>
+          </Fade>
+        </Modal>
 
         <Grid container item xs={12} sm={3} className={classes.gitHub}>
           <Grid item xs={12} sm={12} className={classes.gitHubRepo}>
