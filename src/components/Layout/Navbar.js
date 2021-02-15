@@ -53,8 +53,8 @@ const Navbar = ({classes}) => {
                 }}
                 inputProps={{ "helvetica neue": "search" }}
               />
-            </div> */}
-            <Search/>
+            </div>  */}
+             <Search/>
           </Toolbar>
             <Divider className={classes.divider} />
         </AppBar>
