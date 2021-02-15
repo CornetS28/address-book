@@ -39,7 +39,7 @@ const SingleContact = (props) => {
               <div className={classes.rightUserData}>{phone}</div>
             </div>
             <div className={classes.details}>
-              <div className={classes.leftStaticText}>Email:</div>
+              <div className={classes.leftStaticText}>Country:</div>
               <div className={classes.rightUserData}>{country}</div>
             </div>
             <div className={classes.details}>
