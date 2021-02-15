@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -28,20 +28,22 @@ import styles from "../utils/styles";
 import { connect, useSelector } from "react-redux";
 import { getUsersAction } from "../redux/actions/users";
 
-import Search from "../components/Search";
-
 const Home = ({ classes, getUsers }) => {
-  const [defaultNatCategory, setNatCategory] = useState("ALL");
-
   const users = useSelector((state) => state.user.users);
+  const [defaultNatCategory, setNatCategory] = useState("ALL");
+  const [selectedNat, setSelectedNat] = useState(users);
+  const [hasMore, setHasMore] = useState(true);
+  const [input, setInput] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [user, setUser] = React.useState("");
+
   console.log("old Users:", users);
 
   const choosesNat = (val) => {
     if (val === "ALL") return users;
     return users.filter((user) => user.nat === val);
   };
-
-  const [selectedNat, setSelectedNat] = useState(users);
 
   const nationalityOptions = [
     {
@@ -70,7 +72,7 @@ const Home = ({ classes, getUsers }) => {
     prev: 0,
     next: 20,
   });
-  const [hasMore, setHasMore] = useState(true);
+
   const [current, setCurrent] = useState(users?.slice(count.prev, count.next));
   const getMoreData = () => {
     if (current.length === selectedNat?.length || current.length === 0) {
@@ -87,8 +89,6 @@ const Home = ({ classes, getUsers }) => {
       next: prevState.next + 20,
     }));
   };
-  const [input, setInput] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
 
   const onChange = (event) => {
     const newUser = choosesNat(event.target.value);
@@ -96,20 +96,19 @@ const Home = ({ classes, getUsers }) => {
     setNatCategory(event.target.value);
     setHasMore(true);
     setCurrent(newUser.slice(count.prev, count.next));
-    
   };
   const handleSearch = (e) => {
     setInput(e.target.value);
-    if (e.target.value==="") {
+    if (e.target.value === "") {
       setCurrent(users?.slice(count.prev, count.next));
     } else {
-       setCurrent(
-         users?.filter((user) =>
-           user.name.first.toLowerCase().startsWith(input.toLowerCase())
-         )
-       );
+      setCurrent(
+        users?.filter((user) =>
+          user.name.first.toLowerCase().startsWith(input.toLowerCase())
+        )
+      );
     }
-  }
+  };
 
   const handleUsers = async () => {
     try {
@@ -122,9 +121,6 @@ const Home = ({ classes, getUsers }) => {
   useEffect(() => {
     handleUsers();
   }, []);
-
-  const [open, setOpen] = React.useState(false);
-  const [user, setUser] = React.useState("");
 
   const handleOpen = (uuid) => {
     const testUser = current.find((user) => user.login.uuid === uuid);
@@ -147,14 +143,21 @@ const Home = ({ classes, getUsers }) => {
         sm={10}
         className={classes.headerAndFilterWrapper}
       >
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12} md={3} lg={4}>
           <Typography variant="h6" className={classes.header}>
             My contacts
           </Typography>
         </Grid>
 
-        <Grid item xs={12} sm={4}>
-          <div className={classes.search}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={5}
+          lg={4}
+          className={classes.searchWrapper}
+        >
+          <Grid xs={12} sm={12} className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -166,19 +169,27 @@ const Home = ({ classes, getUsers }) => {
               }}
               inputProps={{ "helvetica neue": "search" }}
               value={input}
-              placeholder={"Search a Session"}
+              placeholder={"Search a user"}
               onChange={handleSearch}
             />
-          </div>
+          </Grid>
         </Grid>
 
-        <Grid item xs={12} sm={4}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={4}
+          lg={4}
+          className={classes.filterWrapper}
+        >
+          
           <Grid container item sm={12} className={classes.filterContainer}>
             <Grid item xs={4} sm={4} className={classes.sortBy}>
               <p className={classes.sortByText}>Sort by</p>
             </Grid>
             <Grid item xs={8} sm={8}>
-              <Grid item xs={12} sm={12} className={classes.TextField2}>
+              <Grid item xs={12} sm={12} className={classes.TextField}>
                 <FormControl
                   variant="outlined"
                   className={classes.selecltFieldInput}
@@ -213,13 +224,13 @@ const Home = ({ classes, getUsers }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={11} sm={12} style={{ margin: "auto" }}>
+        <Grid item xs={12} sm={12} style={{ margin: "auto" }}>
           <Grid className={classes.smallEmpptySpace} />
-          <Divider className={classes.divider} />
+          <Divider className={classes.divider2} />
         </Grid>
       </Grid>
 
-      {/* ALL CONTACTS */}
+      {/* ALL Users */}
       <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
         <Grid
           container
@@ -254,7 +265,7 @@ const Home = ({ classes, getUsers }) => {
             dataLength={current?.length}
             next={getMoreData}
             hasMore={hasMore}
-            loader={current.length !==0 && <LoadingMore />}
+            loader={current.length !== 0 && <LoadingMore />}
           >
             <Grid container justify="space-evenly">
               {current &&
@@ -281,8 +292,9 @@ const Home = ({ classes, getUsers }) => {
                   </Grid>
                 ))}
 
-                {current.length===0 && <h2 style={{ color: "yellow"}}> No Data</h2>}
-              
+              {current.length === 0 && (
+                <h2 style={{ color: "yellow" }}> No Data</h2>
+              )}
             </Grid>
           </InfiniteScroll>
         </Grid>
