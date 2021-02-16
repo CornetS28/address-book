@@ -1,12 +1,11 @@
-import { Users } from "./types";
-import axios from "axios";
+import axios from 'axios';
+import { Users } from './types';
 
 export const getUsersAction = () => async (dispatch) => {
   dispatch({ type: Users.GET_USER_START });
   return axios
-    .get("https://randomuser.me/api/?results=200")
+    .get('https://randomuser.me/api/?results=200')
     .then((response) => {
-      // console.log("user:", response.data.results);
       dispatch({
         type: Users.GET_USER_SUCCESS,
         payload: response.data.results,

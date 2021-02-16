@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "eslint-config-react-app": "^6.0.0",
     "peerdeps": "^1.1.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-infinite-scroll-component": "^6.0.0",
@@ -28,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint-check": "eslint --print-config path/to/main.js | eslint-config-prettier-check"
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "eslint": "^7.20.0",
+    "eslint-auto-fix": "^1.0.3",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",

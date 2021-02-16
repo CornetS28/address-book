@@ -1,16 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI stuff
-import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 // Utils
 import styles from '../../utils/styles';
 
 const Footer = (props) => {
-
   const { classes } = props;
 
   return (
@@ -18,12 +17,12 @@ const Footer = (props) => {
       <Divider className={classes.divider} />
       <Grid className={classes.footerWrapper}>
         <p className={classes.copyWriteText}>
-          Designed and developed by{" "}
+          Designed and developed by{' '}
           <a
             href="https://github.com/CornetS28"
             target="_blank"
-            className={classes.copyWriteLink}
-          >
+            rel="noreferrer"
+            className={classes.copyWriteLink}>
             Samuel Cornet
           </a>
         </p>
@@ -31,7 +30,6 @@ const Footer = (props) => {
     </>
   );
 };
-
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,

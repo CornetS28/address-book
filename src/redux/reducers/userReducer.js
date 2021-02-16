@@ -1,4 +1,4 @@
-import { Users } from "../actions/types";
+import { Users } from '../actions/types';
 
 const INITIAL_STATE = {
   isLoading: false,
@@ -17,8 +17,6 @@ export default (state = INITIAL_STATE, action) => {
         isLoading: false,
         users: action.payload,
       };
-
-
 
     default:
       return state;
