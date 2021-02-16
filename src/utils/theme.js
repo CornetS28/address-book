@@ -16,7 +16,7 @@ export default {
     },
 
     font: {
-      HelveticaNeue: 'helvetica neue',
+      helveticaNeue: 'helvetica neue',
       fontStretch: 'normal',
       lineHeight: 1.17,
       letterSpacingBig: '1.23px',

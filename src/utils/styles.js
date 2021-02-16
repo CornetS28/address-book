@@ -97,11 +97,11 @@ const styles = (theme) => ({
   header: {
     textTransform: 'uppercase',
     fontWeight: 600,
-    fontFamily: theme.palette.font.HelveticaNeue,
+    fontFamily: theme.palette.font.helveticaNeue,
     fontStyle: 'bold',
     paddingLeft: 10,
     paddingTop: 5,
-    color: theme.palette.color.white,
+    // color: theme.palette.color.white,
     [theme.breakpoints.down(600)]: {
       fontSize: 16,
     },
@@ -125,7 +125,7 @@ const styles = (theme) => ({
     },
   },
   sortBy: {
-    fontFamily: theme.palette.font.HelveticaNeue,
+    fontFamily: theme.palette.font.helveticaNeue,
     paddingLeft: 10,
     backgroundColor: theme.palette.secondary.main,
     borderBottomLeftRadius: 3,
@@ -218,7 +218,7 @@ const styles = (theme) => ({
     height: '50px',
   },
   fullname: {
-    fontFamily: theme.palette.HelveticaNeue,
+    fontFamily: theme.palette.helveticaNeue,
     color: theme.palette.secondary.main,
     marginTop: 10,
   },
@@ -282,7 +282,7 @@ const styles = (theme) => ({
   modalHeader: {
     textTransform: 'uppercase',
     fontWeight: 600,
-    fontFamily: theme.palette.font.HelveticaNeue,
+    fontFamily: theme.palette.font.helveticaNeue,
     fontStyle: 'bold',
     paddingLeft: 10,
     paddingTop: 5,
@@ -353,7 +353,7 @@ const styles = (theme) => ({
     padding: '5px 0',
     textAlign: 'center',
     boxShadow: '0 1px 10px rgba(164,164,164,.15)',
-    fontFamily: theme.palette.HelveticaNeue,
+    fontFamily: theme.palette.helveticaNeue,
     bottom: 0,
 
     [theme.breakpoints.down('sm')]: {
