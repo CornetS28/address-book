@@ -133,7 +133,7 @@ const Home = ({ classes, getUsers }) => {
             My contacts
           </Typography>
         </Grid>
-
+        {/* --- Search input field --- */}
         <Grid item xs={12} sm={12} md={5} lg={4} className={classes.searchWrapper}>
           <Grid item xs={12} sm={12} className={classes.search}>
             <div className={classes.searchIcon}>
@@ -151,7 +151,7 @@ const Home = ({ classes, getUsers }) => {
             />
           </Grid>
         </Grid>
-
+        {/* --- Select input field --- */}
         <Grid item xs={12} sm={12} md={4} lg={4} className={classes.filterWrapper}>
           <Grid container item sm={12} className={classes.filterContainer}>
             <Grid item xs={4} sm={4} className={classes.sortBy}>
@@ -195,7 +195,7 @@ const Home = ({ classes, getUsers }) => {
         </Grid>
       </Grid>
 
-      {/* ALL Users */}
+      {/* --- Display all users --- */}
       <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
         <Grid container item xs={12} sm={10} className={classes.contactsSubWrapper}>
           {searchResults &&
@@ -256,7 +256,7 @@ const Home = ({ classes, getUsers }) => {
             </Grid>
           </InfiniteScroll>
         </Grid>
-
+        {/* --- Modal --- */}
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -277,7 +277,7 @@ const Home = ({ classes, getUsers }) => {
             </Grid>
           </Fade>
         </Modal>
-
+        {/* --- GitHub section --- */}
         <Grid container item xs={12} sm={2} className={classes.gitHub}>
           <Grid item xs={12} sm={12} className={classes.gitHubRepo}>
             <p className={classes.copyWriteText}>
