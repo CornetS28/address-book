@@ -68,7 +68,7 @@ const Home = ({ classes, getUsers }) => {
 
   const [count, setCount] = useState({
     prev: 0,
-    next: 50,
+    next: 20,
   });
 
   const [current, setCurrent] = useState(users?.slice(count.prev, count.next));
@@ -78,11 +78,11 @@ const Home = ({ classes, getUsers }) => {
       return;
     }
     setTimeout(() => {
-      setCurrent(current.concat(selectedNat?.slice(count.prev + 50, count.next + 50)));
+      setCurrent(current.concat(selectedNat?.slice(count.prev + 20, count.next + 20)));
     }, 2000);
     setCount((prevState) => ({
-      prev: prevState.prev + 50,
-      next: prevState.next + 50,
+      prev: prevState.prev + 20,
+      next: prevState.next + 20,
     }));
   };
 
