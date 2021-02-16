@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import styles from '../utils/styles';
 
 const SingleContact = (props) => {
-  const { classes, image, fullname, country, phone, age } = props;
+  const { classes, image, fullname, email, phone, age } = props;
   return (
     <Paper variant="outlined" className={classes.singleContact}>
       <Grid className={classes.avatarContainer}>
@@ -30,8 +30,8 @@ const SingleContact = (props) => {
           <div className={classes.rightUserData}>{phone}</div>
         </div>
         <div className={classes.details}>
-          <div className={classes.leftStaticText}>Country:</div>
-          <div className={classes.rightUserData}>{country}</div>
+          <div className={classes.leftStaticText}>email:</div>
+          <div className={classes.rightUserDataEmail}>{email}</div>
         </div>
         <div className={classes.details}>
           <div className={classes.leftStaticText}>Age:</div>
@@ -47,8 +47,8 @@ SingleContact.propTypes = {
   phone: PropTypes.string.isRequired,
   fullname: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(SingleContact);

@@ -65,13 +65,15 @@ const styles = (theme) => ({
     borderTopLeftRadius: 3,
   },
   inputRoot: {
-    color: 'inherit',
+    color: theme.palette.color.white,
+    width: '100%!important',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
+    marginLeft: 43,
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
+    paddingTop: 10,
+    width: '100%!important',
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
@@ -102,6 +104,9 @@ const styles = (theme) => ({
     color: theme.palette.color.white,
     [theme.breakpoints.down(600)]: {
       fontSize: 16,
+    },
+    [theme.breakpoints.down(600)]: {
+      textAlign: 'center',
     },
   },
   filterWrapper: {
@@ -139,7 +144,7 @@ const styles = (theme) => ({
   },
 
   selecltFieldInput: {
-    width: '95%',
+    width: '100%',
     height: 25,
     paddingBottom: 20,
     borderRadius: 0,
@@ -174,11 +179,6 @@ const styles = (theme) => ({
     },
     [theme.breakpoints.down(600)]: {
       margin: '40px auto auto auto',
-    },
-  },
-  contactsSubWrapper: {
-    [theme.breakpoints.down(412)]: {
-      height: '440px',
     },
   },
 
@@ -238,11 +238,27 @@ const styles = (theme) => ({
   rightUserData: {
     color: theme.palette.color.white,
   },
+  rightUserDataEmail: {
+    color: theme.palette.color.white,
+    width: 210,
+    overflowY: 'scroll',
+    [theme.breakpoints.down(1680)]: {
+      width: 180,
+    },
+    [theme.breakpoints.down(960)]: {
+      width: 200,
+    },
+    [theme.breakpoints.down(600)]: {
+      width: 240,
+    },
+  },
+
   gitHubRepo: {
     margin: '0px auto auto auto',
     textAlign: 'center',
     backgroundColor: theme.palette.color.gray,
     color: theme.palette.color.white,
+    bottom: 0,
   },
   // Modal
   modal: {
@@ -302,7 +318,32 @@ const styles = (theme) => ({
 
   // No Match
   noMatch: {
+    margin: '20px auto auto auto',
+    marginBottom: 40,
+    paddingBottom: 20,
+    textAlign: 'center',
+    [theme.breakpoints.down(600)]: {
+      paddingLeft: 140,
+    },
+    [theme.breakpoints.down(554)]: {
+      paddingLeft: 120,
+    },
+    [theme.breakpoints.down(499)]: {
+      paddingLeft: 100,
+    },
+    [theme.breakpoints.down(479)]: {
+      paddingLeft: 80,
+    },
+    [theme.breakpoints.down(449)]: {
+      paddingLeft: 60,
+    },
+    [theme.breakpoints.down(412)]: {
+      paddingLeft: 45,
+    },
     color: theme.palette.secondary.main,
+    [theme.breakpoints.down(376)]: {
+      paddingLeft: 40,
+    },
   },
 
   // Footer

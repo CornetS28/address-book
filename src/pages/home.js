@@ -135,7 +135,7 @@ const Home = ({ classes, getUsers }) => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={5} lg={4} className={classes.searchWrapper}>
-          <Grid xs={12} sm={12} className={classes.search}>
+          <Grid item xs={12} sm={12} className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -158,7 +158,7 @@ const Home = ({ classes, getUsers }) => {
               <p className={classes.sortByText}>Sort by</p>
             </Grid>
             <Grid item xs={8} sm={8}>
-              <Grid item xs={12} sm={12} className={classes.TextField}>
+              <Grid item xs={12} sm={12}>
                 <FormControl
                   variant="outlined"
                   className={classes.selecltFieldInput}
@@ -197,7 +197,7 @@ const Home = ({ classes, getUsers }) => {
 
       {/* ALL Users */}
       <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
-        <Grid container item xs={12} sm={9} className={classes.contactsSubWrapper}>
+        <Grid container item xs={12} sm={10} className={classes.contactsSubWrapper}>
           {searchResults &&
             searchResults.map((user, idx) => (
               <Grid
@@ -223,7 +223,7 @@ const Home = ({ classes, getUsers }) => {
             dataLength={current?.length}
             next={getMoreData}
             hasMore={hasMore}
-            loader={current.length !== 0 && <LoadingMore />}>
+            loader={current?.length !== 0 && <LoadingMore />}>
             <Grid container justify="space-evenly">
               {current &&
                 selectedNat &&
@@ -240,7 +240,7 @@ const Home = ({ classes, getUsers }) => {
                     <SingleContact
                       image={user.picture.medium}
                       fullname={`${user.name.first} ${user.name.last}`}
-                      country={user.location.country}
+                      email={user.email}
                       phone={user.phone}
                       age={user.dob.age}
                       key={idx}
@@ -248,7 +248,11 @@ const Home = ({ classes, getUsers }) => {
                   </Grid>
                 ))}
 
-              {current.length === 0 && <h2 className={classes.noMatch}> No match</h2>}
+              <Grid item xs={12} sm={12}>
+                <Typography variant="h6" className={classes.noMatch}>
+                  {current?.length === 0 && <h2> No match, try again!</h2>}
+                </Typography>
+              </Grid>
             </Grid>
           </InfiniteScroll>
         </Grid>
@@ -274,7 +278,7 @@ const Home = ({ classes, getUsers }) => {
           </Fade>
         </Modal>
 
-        <Grid container item xs={12} sm={3} className={classes.gitHub}>
+        <Grid container item xs={12} sm={2} className={classes.gitHub}>
           <Grid item xs={12} sm={12} className={classes.gitHubRepo}>
             <p className={classes.copyWriteText}>
               Clone my repo via{' '}
