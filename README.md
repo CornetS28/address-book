@@ -18,7 +18,7 @@ The web source code of AddressBook - React
 
 ## Screenshots
 
-![Address Book](https://github.com/CornetS28/address-book/blob/develop/src/utils/images/screenShot.png)
+![Address Book](https://github.com/CornetS28/address-book/blob/testing/src/utils/images/screenShot.png)
 
 ## Requirements
 
