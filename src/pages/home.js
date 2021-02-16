@@ -1,68 +1,68 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import InfiniteScroll from "react-infinite-scroll-component";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 // MUI stuff
-import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
-
-// Components
-import SingleContact from "../components/SingleContact";
-import LoadingMore from "../components/LoadingMore";
-import FullUserDetails from "../components/FullUserDetails";
-
-// Utils
-import styles from "../utils/styles";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 
 // Redux Stuff
-import { connect, useSelector } from "react-redux";
-import { getUsersAction } from "../redux/actions/users";
+import { connect, useSelector } from 'react-redux';
+import { getUsersAction } from '../redux/actions/users';
+
+// Components
+import SingleContact from '../components/SingleContact';
+import LoadingMore from '../components/LoadingMore';
+import FullUserDetails from '../components/FullUserDetails';
+
+// Utils
+import styles from '../utils/styles';
 
 const Home = ({ classes, getUsers }) => {
   const users = useSelector((state) => state.user.users);
-  const [defaultNatCategory, setNatCategory] = useState("ALL");
+  const [defaultNatCategory, setNatCategory] = useState('ALL');
   const [selectedNat, setSelectedNat] = useState(users);
   const [hasMore, setHasMore] = useState(true);
-  const [input, setInput] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [input, setInput] = React.useState('');
+  const [searchResults] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const [user, setUser] = React.useState("");
+  const [user, setUser] = React.useState('');
 
   const choosesNat = (val) => {
-    if (val === "ALL") return users;
+    if (val === 'ALL') return users;
     return users.filter((user) => user.nat === val);
   };
 
   const nationalityOptions = [
     {
-      value: "ALL",
-      label: "ALL",
+      value: 'ALL',
+      label: 'ALL',
     },
     {
-      value: "ES",
-      label: "ES",
+      value: 'ES',
+      label: 'ES',
     },
     {
-      value: "FR",
-      label: "FR",
+      value: 'FR',
+      label: 'FR',
     },
     {
-      value: "GB",
-      label: "GB",
+      value: 'GB',
+      label: 'GB',
     },
     {
-      value: "CH",
-      label: "CH",
+      value: 'CH',
+      label: 'CH',
     },
   ];
 
@@ -78,9 +78,7 @@ const Home = ({ classes, getUsers }) => {
       return;
     }
     setTimeout(() => {
-      setCurrent(
-        current.concat(selectedNat?.slice(count.prev + 20, count.next + 20))
-      );
+      setCurrent(current.concat(selectedNat?.slice(count.prev + 20, count.next + 20)));
     }, 2000);
     setCount((prevState) => ({
       prev: prevState.prev + 20,
@@ -97,13 +95,11 @@ const Home = ({ classes, getUsers }) => {
   };
   const handleSearch = (e) => {
     setInput(e.target.value);
-    if (e.target.value === "") {
+    if (e.target.value === '') {
       setCurrent(users?.slice(count.prev, count.next));
     } else {
       setCurrent(
-        users?.filter((user) =>
-          user.name.first.toLowerCase().startsWith(input.toLowerCase())
-        )
+        users?.filter((user) => user.name.first.toLowerCase().includes(input.toLowerCase())),
       );
     }
   };
@@ -131,28 +127,15 @@ const Home = ({ classes, getUsers }) => {
   };
   return (
     <Grid container className={classes.homePageWrapper}>
-      <Grid
-        container
-        item
-        xs={12}
-        sm={10}
-        className={classes.headerAndFilterWrapper}
-      >
+      <Grid container item xs={12} sm={10} className={classes.headerAndFilterWrapper}>
         <Grid item xs={12} sm={12} md={3} lg={4}>
           <Typography variant="h6" className={classes.header}>
             My contacts
           </Typography>
         </Grid>
-
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={5}
-          lg={4}
-          className={classes.searchWrapper}
-        >
-          <Grid xs={12} sm={12} className={classes.search}>
+        {/* --- Search input field --- */}
+        <Grid item xs={12} sm={12} md={5} lg={4} className={classes.searchWrapper}>
+          <Grid item xs={12} sm={12} className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -162,53 +145,41 @@ const Home = ({ classes, getUsers }) => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ "helvetica neue": "search" }}
+              inputProps={{ 'helvetica neue': 'search' }}
               value={input}
-              placeholder={"Search a user"}
               onChange={handleSearch}
             />
           </Grid>
         </Grid>
-
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={4}
-          lg={4}
-          className={classes.filterWrapper}
-        >
+        {/* --- Select input field --- */}
+        <Grid item xs={12} sm={12} md={4} lg={4} className={classes.filterWrapper}>
           <Grid container item sm={12} className={classes.filterContainer}>
             <Grid item xs={4} sm={4} className={classes.sortBy}>
               <p className={classes.sortByText}>Sort by</p>
             </Grid>
             <Grid item xs={8} sm={8}>
-              <Grid item xs={12} sm={12} className={classes.TextField}>
+              <Grid item xs={12} sm={12}>
                 <FormControl
                   variant="outlined"
                   className={classes.selecltFieldInput}
                   size="small"
-                  fullWidth
-                  className={classes.formControl}
-                >
+                  fullWidth>
                   <Select
                     className={classes.select}
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
                     value={defaultNatCategory}
-                    onChange={onChange}
-                  >
+                    onChange={onChange}>
                     {nationalityOptions.map((option) => (
                       <option
                         key={option.label}
                         value={option.value}
                         style={{
-                          backgroundColor: "#000000",
-                          color: "#F79905",
+                          backgroundColor: '#000000',
+                          color: '#F79905',
                           padding: 5,
-                          textAlign: "center",
-                        }}
-                      >
+                          textAlign: 'center',
+                        }}>
                         {option.label}
                       </option>
                     ))}
@@ -218,21 +189,15 @@ const Home = ({ classes, getUsers }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: "auto" }}>
+        <Grid item xs={12} sm={12} style={{ margin: 'auto' }}>
           <Grid className={classes.smallEmpptySpace} />
           <Divider className={classes.divider2} />
         </Grid>
       </Grid>
 
-      {/* ALL Users */}
+      {/* --- Display all users --- */}
       <Grid container item xs={12} sm={10} className={classes.contactsWrapper}>
-        <Grid
-          container
-          item
-          xs={12}
-          sm={9}
-          className={classes.contactsSubWrapper}
-        >
+        <Grid container item xs={12} sm={10} className={classes.contactsSubWrapper}>
           {searchResults &&
             searchResults.map((user, idx) => (
               <Grid
@@ -242,11 +207,10 @@ const Home = ({ classes, getUsers }) => {
                 md={4}
                 lg={3}
                 key={idx}
-                className={classes.contactContainer}
-              >
+                className={classes.contactContainer}>
                 <SingleContact
                   image={user.picture.medium}
-                  fullname={user.name.first + " " + user.name.last}
+                  fullname={`${user.name.first} ${user.name.last}`}
                   country={user.location.country}
                   phone={user.phone}
                   age={user.dob.age}
@@ -259,8 +223,7 @@ const Home = ({ classes, getUsers }) => {
             dataLength={current?.length}
             next={getMoreData}
             hasMore={hasMore}
-            loader={current.length !== 0 && <LoadingMore />}
-          >
+            loader={current?.length !== 0 && <LoadingMore />}>
             <Grid container justify="space-evenly">
               {current &&
                 selectedNat &&
@@ -273,12 +236,11 @@ const Home = ({ classes, getUsers }) => {
                     lg={3}
                     key={idx}
                     className={classes.contactContainer}
-                    onClick={() => handleOpen(user.login.uuid)}
-                  >
+                    onClick={() => handleOpen(user.login.uuid)}>
                     <SingleContact
                       image={user.picture.medium}
-                      fullname={user.name.first + " " + user.name.last}
-                      country={user.location.country}
+                      fullname={`${user.name.first} ${user.name.last}`}
+                      email={user.email}
                       phone={user.phone}
                       age={user.dob.age}
                       key={idx}
@@ -286,13 +248,15 @@ const Home = ({ classes, getUsers }) => {
                   </Grid>
                 ))}
 
-              {current.length === 0 && (
-                <h2 style={{ color: "yellow" }}> No Data</h2>
-              )}
+              <Grid item xs={12} sm={12}>
+                <Typography variant="h6" className={classes.noMatch}>
+                  {current?.length === 0 && <h2> No match, try again!</h2>}
+                </Typography>
+              </Grid>
             </Grid>
           </InfiniteScroll>
         </Grid>
-
+        {/* --- Modal --- */}
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -303,8 +267,7 @@ const Home = ({ classes, getUsers }) => {
           BackdropComponent={Backdrop}
           BackdropProps={{
             timeout: 500,
-          }}
-        >
+          }}>
           <Fade in={open} className={classes.modalWrapper}>
             <Grid item xs={10} sm={8}>
               <h4 className={classes.modalHeader}>User Full Details</h4>
@@ -314,16 +277,16 @@ const Home = ({ classes, getUsers }) => {
             </Grid>
           </Fade>
         </Modal>
-
-        <Grid container item xs={12} sm={3} className={classes.gitHub}>
+        {/* --- GitHub section --- */}
+        <Grid container item xs={12} sm={2} className={classes.gitHub}>
           <Grid item xs={12} sm={12} className={classes.gitHubRepo}>
             <p className={classes.copyWriteText}>
-              Clone my repo via{" "}
+              Clone my repo via{' '}
               <a
                 href="https://github.com/CornetS28"
                 target="_blank"
-                className={classes.copyWriteLink}
-              >
+                rel="noreferrer"
+                className={classes.copyWriteLink}>
                 GitHub
               </a>
             </p>

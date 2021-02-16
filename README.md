@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# AddressBook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The web source code of AddressBook - React
 
-## Available Scripts
+# Table of Contents
 
-In the project directory, you can run:
+- [AddressBook](#addressbook)
+  - [Screenshots](#screenshots)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+    - [My Git Branching Model](#my-git-branching-model)
+    - [Code linting and formatting](#code-linting-and-formatting)
+    - [Getting Started on a Task](#getting-started-on-a-task)
+  - [Publishing for Demoing](#publishing-for-staging-demoing)
+  - [Building for Production](#building-for-production)
+  - [Unit Testing with jest](#unit-testing-with-jest)
+  - [Run Github Action](#run-github-action)
 
-### `yarn start`
+## Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Address Book](https://github.com/CornetS28/address-book/blob/testing/src/utils/images/screenShot.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Requirements
 
-### `yarn test`
+For development, you will need Node.js installed
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Clone the repo and enter the project folder
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/CornetS28/address-book 
+cd AddressBook
+```
 
-### `yarn eject`
+- Install dependencies: `npm i`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Run:
+ 
+    ```
+      npm start
+    ```
+  
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+That should be enough for UI related tasks.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### My Git Branching Model
 
-## Learn More
+I have followed a modified version of [Nvie's widely used Git branching model](https://nvie.com/posts/a-successful-git-branching-model/). Basically:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- I have two primary branches:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  1. `main`: For production releases
+  2. `develop`: For development work
 
-### Code Splitting
+- For new features, I have created a new branch based on `develop` that I have merged back into `develop` on completion. I have named it anything, except for the followings:
+  - main
+  - develop
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Code linting and formatting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+I took great pride in providing quality software. To be able to do so, I have started with the code formatting using Prettier. Since my code will be read by other humans, so have used the ESLint linter.
 
-### Making a Progressive Web App
+My code did not approved until it passed the automated linting tests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+To get started, I have installed those two extensions within VSCode:
 
-### Advanced Configuration
+1. [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+2. [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+This was enough for my editor to automatically format my code or/and point out errors in my whole codebase that I need to handle manually.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Getting Started on the Tasks
 
-### `yarn build` fails to minify
+With that said, to quickly started working on a task, I have followed those steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Cloned the project locally
+
+```
+git clone https://github.com/CornetS28/address-book/
+cd AddressBook
+```
+
+2. Created a new branch for the feature I am  working on. Always branched out from `develop` for creating a new branch
+
+```
+git checkout -b [NEW-BRANCH-NAME] develop
+```
+
+3. Done the work and write succinct commit messages.
+4. Pushed to `origin` on the new branch I created in step 2
+5. Created a new Pull Request on GitHub. (from my branch to the `develop` branch. NOT `main`)
+
+
+## Publishing for Demoing
+
+TBD
+
+## Building for Production
+
+TBD
+
+
+## Run Github Action
+TBD
